@@ -20,3 +20,7 @@ class PokemonEntity(models.Model):
     Attack = models.CharField(max_length=200,blank=True)
     Defense = models.CharField(max_length=200,blank=True)
     Stamina = models.CharField(max_length=200,blank=True)
+
+    def __str__(self):
+        return f"{self.pokemon} lvl {self.Level}"
+
