@@ -57,6 +57,10 @@ def show_all_pokemons(request):
 def show_pokemon(request, pokemon_id):
     current_time = timezone.localtime()
     requested_pokemon = get_object_or_404(Pokemon, pk=pokemon_id)
+    pokemon = {
+        "title_ru": requested_pokemon.title,
+        "img_url": requested_pokemon.photo.url
+               }
     requested_pokemon_entities = get_list_or_404(PokemonEntity, pokemon__id=pokemon_id, disappears_at__gte=current_time,
                                                  appears_at__lte=current_time)
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
@@ -68,5 +72,5 @@ def show_pokemon(request, pokemon_id):
         )
 
     return render(request, 'pokemon.html', context={
-        'map': folium_map._repr_html_(), 'pokemon': requested_pokemon
+        'map': folium_map._repr_html_(), 'pokemon': pokemon
     })
