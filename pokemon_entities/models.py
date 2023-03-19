@@ -2,12 +2,14 @@ from django.db import models  # noqa F401
 
 
 class Pokemon(models.Model):
-    title = models.CharField(max_length=200)
-    title_en = models.CharField(max_length=200, blank=True)
-    title_jp = models.CharField(max_length=200, blank=True)
-    photo = models.ImageField(upload_to='pokemon', blank=True)
-    description = models.TextField(blank=True)
-    previous_evolution = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL,
+    """Покемон"""
+    title = models.CharField('Имя', max_length=200)
+    title_en = models.CharField('Имя англ', max_length=200, blank=True)
+    title_jp = models.CharField('Имя яп', max_length=200, blank=True)
+    photo = models.ImageField('Изображение', upload_to='pokemon', blank=True)
+    description = models.TextField('Описание', blank=True)
+    previous_evolution = models.ForeignKey('self', verbose_name='Из кого иволюционировал', null=True, blank=True,
+                                           on_delete=models.SET_NULL,
                                            related_name='next_evolution')
 
     def __str__(self):
@@ -15,16 +17,17 @@ class Pokemon(models.Model):
 
 
 class PokemonEntity(models.Model):
+    """Свойство покемона и информация о времени и месте появления"""
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
-    lat = models.FloatField()
-    long = models.FloatField()
-    appears_at = models.DateTimeField(null=True, blank=True)
-    disappears_at = models.DateTimeField(null=True, blank=True)
-    Level = models.CharField(max_length=200, blank=True)
-    Health = models.CharField(max_length=200, blank=True)
-    Attack = models.CharField(max_length=200, blank=True)
-    Defense = models.CharField(max_length=200, blank=True)
-    Stamina = models.CharField(max_length=200, blank=True)
+    lat = models.FloatField('Широта')
+    long = models.FloatField('Долгота')
+    appears_at = models.DateTimeField('Время появления', null=True, blank=True)
+    disappears_at = models.DateTimeField('Время исчезновения', null=True, blank=True)
+    Level = models.CharField('Уровень', max_length=200, blank=True)
+    Health = models.CharField('Здоровье', max_length=200, blank=True)
+    Attack = models.CharField('Атака', max_length=200, blank=True)
+    Defense = models.CharField('Защита', max_length=200, blank=True)
+    Stamina = models.CharField('Выносливость', max_length=200, blank=True)
 
     def __str__(self):
         return f"{self.pokemon} lvl {self.Level}"
