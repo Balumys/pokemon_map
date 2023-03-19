@@ -1,6 +1,5 @@
 import folium
 
-
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.utils import timezone
 from .models import PokemonEntity, Pokemon
@@ -62,10 +61,12 @@ def show_pokemon(request, pokemon_id):
         "img_url": requested_pokemon.photo.url,
         "title_en": requested_pokemon.title_en,
         "title_jp": requested_pokemon.title_jp,
-        "description": requested_pokemon.description
-               }
-    requested_pokemon_entities = get_list_or_404(PokemonEntity, pokemon__id=pokemon_id, disappears_at__gte=current_time,
-                                                 appears_at__lte=current_time)
+        "description": requested_pokemon.description,
+        "next_evolution": requested_pokemon.next_evolution,
+        "previous_evolution": requested_pokemon.previous_evolution
+    }
+    requested_pokemon_entities = PokemonEntity.objects.filter(pokemon__id=pokemon_id, disappears_at__gte=current_time,
+                                                              appears_at__lte=current_time)
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in requested_pokemon_entities:
         add_pokemon(
