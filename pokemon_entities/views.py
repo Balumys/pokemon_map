@@ -57,7 +57,7 @@ def show_pokemon(request, pokemon_id):
     current_time = timezone.localtime()
     requested_pokemon = get_object_or_404(Pokemon, pk=pokemon_id)
     try:
-        next_evolution = requested_pokemon.next_evolution.get()
+        next_evolution = requested_pokemon.next_evolutions.get()
     except Pokemon.DoesNotExist:
         next_evolution = None
     pokemon = {
