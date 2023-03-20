@@ -23,11 +23,11 @@ class PokemonEntity(models.Model):
     long = models.FloatField('Долгота')
     appears_at = models.DateTimeField('Время появления', null=True, blank=False)
     disappears_at = models.DateTimeField('Время исчезновения', null=True, blank=False)
-    Level = models.CharField('Уровень', max_length=200, blank=True)
-    Health = models.CharField('Здоровье', max_length=200, blank=True)
-    Attack = models.CharField('Атака', max_length=200, blank=True)
-    Defense = models.CharField('Защита', max_length=200, blank=True)
-    Stamina = models.CharField('Выносливость', max_length=200, blank=True)
+    level = models.CharField('Уровень', max_length=200, blank=True)
+    health = models.CharField('Здоровье', max_length=200, blank=True)
+    attack = models.CharField('Атака', max_length=200, blank=True)
+    defense = models.CharField('Защита', max_length=200, blank=True)
+    stamina = models.CharField('Выносливость', max_length=200, blank=True)
 
     def __str__(self):
         return f"{self.pokemon} lvl {self.Level}"
