@@ -18,7 +18,7 @@ class Pokemon(models.Model):
 
 class PokemonEntity(models.Model):
     """Свойство покемона и информация о времени и месте появления"""
-    pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
+    pokemon = models.ForeignKey(Pokemon, on_delete=models.PROTECT)
     lat = models.FloatField('Широта')
     long = models.FloatField('Долгота')
     appears_at = models.DateTimeField('Время появления', null=True, blank=False)
@@ -30,4 +30,4 @@ class PokemonEntity(models.Model):
     stamina = models.CharField('Выносливость', max_length=200, blank=True)
 
     def __str__(self):
-        return f"{self.pokemon} lvl {self.Level}"
+        return f"{self.pokemon} lvl {self.level}"
