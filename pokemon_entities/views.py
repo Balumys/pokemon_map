@@ -56,10 +56,8 @@ def show_all_pokemons(request):
 def show_pokemon(request, pokemon_id):
     current_time = timezone.localtime()
     requested_pokemon = get_object_or_404(Pokemon, pk=pokemon_id)
-    try:
-        next_evolution = requested_pokemon.next_evolutions.get()
-    except Pokemon.DoesNotExist:
-        next_evolution = None
+    next_evolution = requested_pokemon.next_evolutions.filter().first()
+
     pokemon = {
         "title_ru": requested_pokemon.title,
         "img_url": requested_pokemon.photo.url,
