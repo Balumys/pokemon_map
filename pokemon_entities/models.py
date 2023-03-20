@@ -30,4 +30,4 @@ class PokemonEntity(models.Model):
     stamina = models.CharField('Выносливость', max_length=200, blank=True)
 
     def __str__(self):
-        return f"{self.pokemon} lvl {self.level}"
+        return f"{self.pokemon.title} lvl {self.level}"
