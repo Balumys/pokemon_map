@@ -55,7 +55,7 @@ def show_all_pokemons(request):
 
 def show_pokemon(request, pokemon_id):
     requested_pokemon = get_object_or_404(Pokemon, pk=pokemon_id)
-    next_evolution = requested_pokemon.next_evolutions.filter().first()
+    next_evolution = requested_pokemon.next_evolutions.first()
 
     pokemon = {
         "title_ru": requested_pokemon.title,
